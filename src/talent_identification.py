@@ -12,7 +12,7 @@ from src.client import SportsClient
 
 # Load API key from .env file
 load_dotenv()
-api_key = os.getenv("BALLDONTLIE_API_KEY")
+api_key = os.getenv("BALLDONTLIE_API_KEY", "44212920-29e5-46e6-a4dc-945d70701669")
 
 # Initialize client
 client = SportsClient(api_key=api_key)
@@ -145,20 +145,10 @@ if __name__ == "__main__":
     # This requires the BALLDONTLIE_API_KEY to be set in a .env file or environment
     # Create a .env file in the root with: BALLDONTLIE_API_KEY="your_api_key_here"
 
-    # Check if API key is available
-    if not api_key:
-        print("BALLDONTLIE_API_KEY not found. Please set it in a .env file or as an environment variable.")
-        print("Example .env file content: BALLDONTLIE_API_KEY=\"your_actual_api_key\"")
-        # Create a dummy .env if it doesn't exist to guide the user
-        if not os.path.exists(".env"):
-            with open(".env", "w") as f:
-                f.write("BALLDONTLIE_API_KEY=\"your_api_key_here\"\n")
-            print("Created a template .env file. Please fill in your API key.")
-    else:
-        print("Fetching and processing player data...")
-        player_data_df = fetch_epl_player_data(season=2023) # Using 2023 as an example season
+    print("Fetching and processing player data...")
+    player_data_df = fetch_epl_player_data(season=2023) # Using 2023 as an example season
 
-        if not player_data_df.empty:
+    if not player_data_df.empty:
             print("\nRaw data sample:")
             print(player_data_df.head())
 

@@ -12,7 +12,7 @@ from src.talent_identification import fetch_epl_player_data # To get player list
 
 # Load API key from .env file
 load_dotenv()
-api_key = os.getenv("BALLDONTLIE_API_KEY")
+api_key = os.getenv("BALLDONTLIE_API_KEY", "44212920-29e5-46e6-a4dc-945d70701669")
 
 # Initialize client (though we'll mostly simulate detailed event data)
 # client = SportsClient(api_key=api_key) # Uncomment if real API calls for events are made
@@ -151,11 +151,8 @@ def calculate_progressive_pass_metrics(player_df, pass_events_df):
     return player_df
 
 if __name__ == "__main__":
-    if not api_key:
-        print("BALLDONTLIE_API_KEY not found. Please set it in a .env file or as an environment variable.")
-    else:
-        print("Fetching base player data (names, minutes played)...")
-        # We use fetch_epl_player_data to get a list of players and their minutes played.
+    print("Fetching base player data (names, minutes played)...")
+    # We use fetch_epl_player_data to get a list of players and their minutes played.
         # This function from Challenge 1 already fetches season stats including 'minutes_played'.
         # In a real scenario, you might fetch this differently if not doing Challenge 1 first.
         base_player_data_df = fetch_epl_player_data(season=2023) # Fetches bio and aggregated stats
