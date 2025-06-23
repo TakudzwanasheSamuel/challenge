@@ -14,8 +14,8 @@ from src.performance_analytics import calculate_progressive_pass_metrics, simula
 
 # Load API key
 load_dotenv()
-api_key = os.getenv("BALLDONTLIE_API_KEY")
-client = SportsClient(api_key=api_key) if api_key else None
+api_key = os.getenv("BALLDONTLIE_API_KEY", "44212920-29e5-46e6-a4dc-945d70701669")
+client = SportsClient(api_key=api_key)
 
 def get_team_standings(season=2023):
     """Fetches league standings."""
@@ -151,11 +151,8 @@ def recommend_players(target_team_name, position_needed, all_players_df, max_age
 
 
 if __name__ == "__main__":
-    if not client:
-        print("BALLDONTLIE_API_KEY not found or client not initialized. Transfer optimization script cannot run fully.")
-    else:
-        print("Starting Transfer Strategy Optimization process...")
-        current_season = 2023 # Example season
+    print("Starting Transfer Strategy Optimization process...")
+    current_season = 2023 # Example season
 
         # 1. Fetch all necessary data
         print("\nFetching team standings...")
